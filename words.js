@@ -24,7 +24,17 @@ const CATEGORIES = [
   // --- ระดับเปิดโลกกว้าง ---
   { id: "nature", th: "ธรรมชาติ", en: "Nature", icon: "☀️" },
   { id: "shapes", th: "รูปทรง", en: "Shapes", icon: "📐" },
-  { id: "jobs", th: "อาชีพ", en: "Jobs", icon: "👩‍⚕️" }
+  { id: "jobs", th: "อาชีพ", en: "Jobs", icon: "👩‍⚕️" },
+
+  // --- กลุ่มเพิ่มเติม ---
+  { id: "weather", th: "สภาพอากาศ", en: "Weather", icon: "🌧️" },
+  { id: "rooms", th: "ห้องในบ้าน", en: "Rooms", icon: "🛏️" },
+  { id: "instruments", th: "เครื่องดนตรี", en: "Musical Instruments", icon: "🎸" },
+  { id: "sports", th: "กีฬา", en: "Sports", icon: "⚽" },
+  { id: "insects", th: "แมลง", en: "Insects", icon: "🦋" },
+  { id: "time", th: "เวลาและวัน", en: "Time & Days", icon: "🌅" },
+  { id: "sea-animals", th: "สัตว์น้ำ", en: "Sea Animals", icon: "🐋" },
+  { id: "emotions", th: "อารมณ์", en: "Emotions", icon: "😄" }
 ];
 
 // ไฟล์ words/*.js ต้องถูกโหลดก่อนไฟล์นี้ใน index.html
@@ -42,5 +52,13 @@ const WORDS = [
   ...WORDS_FOOD,
   ...WORDS_NATURE,
   ...WORDS_SHAPES,
-  ...WORDS_JOBS
+  ...WORDS_JOBS,
+  ...WORDS_WEATHER,
+  ...WORDS_ROOMS,
+  ...WORDS_INSTRUMENTS,
+  ...WORDS_SPORTS,
+  ...WORDS_INSECTS,
+  ...WORDS_TIME,
+  ...WORDS_SEA_ANIMALS,
+  ...WORDS_EMOTIONS
 ];
