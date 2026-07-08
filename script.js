@@ -212,7 +212,7 @@ function handleAnswer(btn, chosen, correctWord) {
     allBtns.forEach((b) => {
       if (b._word === correctWord) b.classList.add("correct");
     });
-    speak(`คำตอบคือ ${correctWord.th}`, "th-TH");
+    speak(`The answer is ${correctWord.en}`, "en-US");
   }
 
   setTimeout(() => {
