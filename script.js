@@ -104,6 +104,9 @@ function renderCategories() {
   });
 }
 
+renderStars();
+renderCategories();
+
 function startGame(categoryId) {
   const pool = WORDS.filter((w) => w.category === categoryId);
   const count = Math.min(QUESTIONS_PER_ROUND, pool.length);
@@ -245,6 +248,3 @@ el.btnSpeakTh.addEventListener("click", () => {
 
 el.btnPlayAgain.addEventListener("click", () => startGame(state.category));
 el.btnMenu.addEventListener("click", () => showScreen(el.screenMenu));
-
-renderStars();
-renderCategories();
