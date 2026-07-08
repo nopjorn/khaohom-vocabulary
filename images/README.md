@@ -4,7 +4,7 @@
 
 ถ้าอยากใช้รูปจริงแทน emoji สำหรับคำศัพท์ไหน ทำตามนี้:
 
-1. สร้างโฟลเดอร์ย่อยตามหมวดหมู่ เช่น `images/animals/dog.png`
+1. สร้างโฟลเดอร์ย่อยตามหมวดหมู่ เช่น `images/animals/dog.png` (รองรับ `.svg` ด้วย เช่น `images/animals/dog.svg`)
 2. เปิดไฟล์ `../words.js` แล้วหาคำศัพท์ที่ต้องการ เช่น
    ```js
    { emoji: "🐶", th: "หมา", en: "Dog", category: "animals", image: null }
