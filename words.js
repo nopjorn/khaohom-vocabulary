@@ -34,8 +34,6 @@ const CATEGORIES = [
   { id: "insects", th: "แมลง", en: "Insects", icon: "🦋" },
   { id: "time", th: "เวลาและวัน", en: "Time & Days", icon: "🌅" },
   { id: "sea-animals", th: "สัตว์น้ำ", en: "Sea Animals", icon: "🐋" },
-
-  // --- ยังไม่เติมจนเต็ม Emoji ---
   { id: "emotions", th: "อารมณ์", en: "Emotions", icon: "😄" },
   { id: "vegetables", th: "ผัก", en: "Vegetables", icon: "🥦" },
   { id: "household", th: "ของใช้ในบ้าน", en: "Household Items", icon: "🧹" },

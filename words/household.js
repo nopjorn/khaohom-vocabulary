@@ -15,5 +15,17 @@ const WORDS_HOUSEHOLD = [
   { emoji: "🍴", th: "ส้อม", en: "Fork", category: "household", image: null },
   { emoji: "🥛", th: "แก้วนม", en: "Cup", category: "household", image: null },
   { emoji: "🧺", th: "ตะกร้าผ้า", en: "Basket", category: "household", image: null },
-  { emoji: "🔑", th: "กุญแจ", en: "Key", category: "household", image: null }
-];
+  { emoji: "🔑", th: "กุญแจ", en: "Key", category: "household", image: null },
+  { emoji: "🏠", th: "บ้าน", en: "House", category: "household", image: null },
+  { emoji: "🛋️", th: "โซฟา", en: "Sofa / Couch", category: "household", image: null },
+  { emoji: "💡", th: "หลอดไฟ / โคมไฟ", en: "Light bulb", category: "household", image: null },
+  { emoji: "📺", th: "โทรทัศน์", en: "Television", category: "household", image: null },
+  { emoji: "🧸", th: "ตุ๊กตา", en: "Teddy bear / Toy", category: "household", image: null },
+  { emoji: "🖼️", th: "กรอบรูป / รูปภาพ", en: "Picture frame", category: "household", image: null },
+  { emoji: "⏰", th: "นาฬิกาปลุก", en: "Alarm clock", category: "household", image: null },
+  { emoji: "🗑️", th: "ถังขยะ", en: "Wastebasket", category: "household", image: null },
+  { emoji: "🧻", th: "กระดาษทิชชู่", en: "Toilet paper", category: "household", image: null },
+  { emoji: "🪞", th: "กระจก", en: "Mirror", category: "household", image: null },
+  { emoji: "🚿", th: "ฝักบัว", en: "Shower", category: "household", image: null },
+  { emoji: "🛁", th: "อ่างอาบน้ำ", en: "Bathtub", category: "household", image: null }
+]

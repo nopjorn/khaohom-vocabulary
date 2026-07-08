@@ -15,5 +15,11 @@ const WORDS_WILD_ANIMALS = [
   { emoji: "🐊", th: "จระเข้", en: "Crocodile", category: "wild-animals", image: null },
   { emoji: "🦘", th: "จิงโจ้", en: "Kangaroo", category: "wild-animals", image: null },
   { emoji: "🦏", th: "แรด", en: "Rhino", category: "wild-animals", image: null },
-  { emoji: "🐆", th: "เสือดาว", en: "Leopard", category: "wild-animals", image: null }
+  { emoji: "🐆", th: "เสือดาว", en: "Leopard", category: "wild-animals", image: null },
+  { emoji: "🐨", th: "โคอาลา", en: "Koala", category: "wild-animals", image: null },
+  { emoji: "🦛", th: "ฮิปโป", en: "Hippopotamus", category: "wild-animals", image: null },
+  { emoji: "🦥", th: "สล็อต", en: "Sloth", category: "wild-animals", image: null },
+  { emoji: "🦔", th: "เม่น", en: "Hedgehog", category: "wild-animals", image: null },
+  { emoji: "🦅", th: "นกอินทรี", en: "Eagle", category: "wild-animals", image: null },
+  { emoji: "🦉", th: "นกฮูก", en: "Owl", category: "wild-animals", image: null }
 ];

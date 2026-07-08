@@ -15,5 +15,14 @@ const WORDS_PLACES = [
   { emoji: "🏦", th: "ธนาคาร", en: "Bank", category: "places", image: null },
   { emoji: "🍽️", th: "ร้านอาหาร", en: "Restaurant", category: "places", image: null },
   { emoji: "🏊", th: "สระว่ายน้ำ", en: "Swimming Pool", category: "places", image: null },
-  { emoji: "🛒", th: "ตลาด", en: "Market", category: "places", image: null }
-];
+  { emoji: "🛒", th: "ตลาด", en: "Market", category: "places", image: null },
+  { emoji: "☕", th: "ร้านกาแฟ", en: "Café", category: "places", image: null },
+  { emoji: "🏢", th: "บริษัท / อาคารสำนักงาน", en: "Office building", category: "places", image: null },
+  { emoji: "🏤", th: "ไปรษณีย์", en: "Post office", category: "places", image: null },
+  { emoji: "👮", th: "สถานีตำรวจ", en: "Police station", category: "places", image: null },
+  { emoji: "🚒", th: "สถานีดับเพลิง", en: "Fire station", category: "places", image: null },
+  { emoji: "🏟️", th: "สนามกีฬา", en: "Stadium", category: "places", image: null },
+  { emoji: "🎬", th: "โรงภาพยนตร์", en: "Movie theater", category: "places", image: null },
+  { emoji: "⛰️", th: "ภูเขา", en: "Mountain", category: "places", image: null },
+  { emoji: "🛫", th: "สนามบิน", en: "Airport", category: "places", image: null }
+]
