@@ -1,5 +1,8 @@
 // Vocaberry game logic
 
+// เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
+const APP_VERSION = "1.1.0";
+
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 8;
 const OPTIONS_COUNT = 3;
@@ -28,7 +31,10 @@ const el = {
   resultScore: document.getElementById("resultScore"),
   btnPlayAgain: document.getElementById("btnPlayAgain"),
   btnMenu: document.getElementById("btnMenu"),
+  appVersion: document.getElementById("appVersion"),
 };
+
+el.appVersion.textContent = APP_VERSION;
 
 function showScreen(name) {
   [el.screenMenu, el.screenGame, el.screenResult].forEach((s) => s.classList.remove("active"));
@@ -103,6 +109,9 @@ function renderCategories() {
     el.categoryGrid.appendChild(btn);
   });
 }
+
+renderStars();
+renderCategories();
 
 function startGame(categoryId) {
   const pool = WORDS.filter((w) => w.category === categoryId);
@@ -209,7 +218,7 @@ function handleAnswer(btn, chosen, correctWord) {
     allBtns.forEach((b) => {
       if (b._word === correctWord) b.classList.add("correct");
     });
-    speak(`คำตอบคือ ${correctWord.th}`, "th-TH");
+    speak(`The answer is ${correctWord.en}`, "en-US");
   }
 
   setTimeout(() => {
@@ -245,6 +254,3 @@ el.btnSpeakTh.addEventListener("click", () => {
 
 el.btnPlayAgain.addEventListener("click", () => startGame(state.category));
 el.btnMenu.addEventListener("click", () => showScreen(el.screenMenu));
-
-renderStars();
-renderCategories();
