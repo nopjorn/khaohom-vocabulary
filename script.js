@@ -23,7 +23,8 @@ const el = {
   optionsGrid: document.getElementById("optionsGrid"),
   feedback: document.getElementById("feedback"),
   btnBack: document.getElementById("btnBack"),
-  btnSpeak: document.getElementById("btnSpeak"),
+  btnSpeakEn: document.getElementById("btnSpeakEn"),
+  btnSpeakTh: document.getElementById("btnSpeakTh"),
   resultScore: document.getElementById("resultScore"),
   btnPlayAgain: document.getElementById("btnPlayAgain"),
   btnMenu: document.getElementById("btnMenu"),
@@ -77,10 +78,6 @@ function speak(text, lang, onEnd) {
   activeUtterance = utter;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utter);
-}
-
-function speakWord(word) {
-  speak(word.th, "th-TH", () => speak(word.en, "en-US"));
 }
 
 function shuffle(arr) {
@@ -154,13 +151,13 @@ function renderQuestion() {
     const row = document.createElement("div");
     row.className = "option-row";
 
-    const listenBtn = document.createElement("button");
-    listenBtn.className = "opt-listen";
-    listenBtn.setAttribute("aria-label", `Listen: ${opt.en} (${opt.th})`);
-    listenBtn.textContent = "🔊";
-    listenBtn.addEventListener("click", (e) => {
+    const listenBtnEn = document.createElement("button");
+    listenBtnEn.className = "opt-listen opt-listen-en";
+    listenBtnEn.setAttribute("aria-label", `Listen English: ${opt.en}`);
+    listenBtnEn.innerHTML = `🔊<span class="opt-listen-label">EN</span>`;
+    listenBtnEn.addEventListener("click", (e) => {
       e.stopPropagation();
-      speakWord(opt);
+      speak(opt.en, "en-US");
     });
 
     const btn = document.createElement("button");
@@ -169,12 +166,22 @@ function renderQuestion() {
     btn._word = opt;
     btn.addEventListener("click", () => handleAnswer(btn, opt, word));
 
-    row.appendChild(listenBtn);
+    const listenBtnTh = document.createElement("button");
+    listenBtnTh.className = "opt-listen opt-listen-th";
+    listenBtnTh.setAttribute("aria-label", `ฟังภาษาไทย: ${opt.th}`);
+    listenBtnTh.innerHTML = `🔊<span class="opt-listen-label">ไทย</span>`;
+    listenBtnTh.addEventListener("click", (e) => {
+      e.stopPropagation();
+      speak(opt.th, "th-TH");
+    });
+
+    row.appendChild(listenBtnEn);
     row.appendChild(btn);
+    row.appendChild(listenBtnTh);
     el.optionsGrid.appendChild(row);
   });
 
-  // speakWord(word); อยู่ในปุ่ม 🔊 แทน ไม่ต้องพูดอัตโนมัติ
+  // ไม่ต้องพูดอัตโนมัติ ผู้เล่นกดปุ่ม 🔊 EN/ไทย เองแทน
 }
 
 function handleAnswer(btn, chosen, correctWord) {
@@ -226,9 +233,14 @@ el.btnBack.addEventListener("click", () => {
   showScreen(el.screenMenu);
 });
 
-el.btnSpeak.addEventListener("click", () => {
+el.btnSpeakEn.addEventListener("click", () => {
   const word = state.questions[state.currentIndex];
-  if (word) speakWord(word);
+  if (word) speak(word.en, "en-US");
+});
+
+el.btnSpeakTh.addEventListener("click", () => {
+  const word = state.questions[state.currentIndex];
+  if (word) speak(word.th, "th-TH");
 });
 
 el.btnPlayAgain.addEventListener("click", () => startGame(state.category));
