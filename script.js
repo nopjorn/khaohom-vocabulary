@@ -174,7 +174,7 @@ function renderQuestion() {
     el.optionsGrid.appendChild(row);
   });
 
-  speakWord(word);
+  // speakWord(word); อยู่ในปุ่ม 🔊 แทน ไม่ต้องพูดอัตโนมัติ
 }
 
 function handleAnswer(btn, chosen, correctWord) {
