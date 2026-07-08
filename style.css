@@ -188,7 +188,8 @@ body {
 .opt-listen {
   flex: 0 0 auto;
   width: 56px;
-  background: var(--yellow);
+  /* background: var(--yellow); */
+  background: white;
   border: none;
   border-radius: 16px;
   font-size: 1.5rem;
