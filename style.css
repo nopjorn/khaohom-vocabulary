@@ -358,3 +358,10 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.app-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #bbb;
+  padding: 16px 0 4px;
+}
