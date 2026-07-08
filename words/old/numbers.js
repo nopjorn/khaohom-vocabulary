@@ -1,0 +1,63 @@
+// คำศัพท์หมวดตัวเลข
+// รูปภาพ: Wikimedia Commons "Eo circle blue white number" SVG set (CC-BY/CC-BY-SA) ลิงก์ตรง ไม่ต้องเก็บไฟล์ในโปรเจกต์
+const WORDS_NUMBERS = [
+  // 1-10 (มีระบบ Emoji รองรับโดยตรง)
+  { emoji: "1️⃣", th: "หนึ่ง", en: "One", category: "numbers", image: null },
+  { emoji: "2️⃣", th: "สอง", en: "Two", category: "numbers", image: null },
+  { emoji: "3️⃣", th: "สาม", en: "Three", category: "numbers", image: null },
+  { emoji: "4️⃣", th: "สี่", en: "Four", category: "numbers", image: null },
+  { emoji: "5️⃣", th: "ห้า", en: "Five", category: "numbers", image: null },
+  { emoji: "6️⃣", th: "หก", en: "Six", category: "numbers", image: null },
+  { emoji: "7️⃣", th: "เจ็ด", en: "Seven", category: "numbers", image: null },
+  { emoji: "8️⃣", th: "แปด", en: "Eight", category: "numbers", image: null },
+  { emoji: "9️⃣", th: "เก้า", en: "Nine", category: "numbers", image: null },
+  { emoji: "🔟", th: "สิบ", en: "Ten", category: "numbers", image: null },
+
+  // 11-20 (ใช้การผสมตัวเลข)
+  { emoji: "1️⃣1️⃣", th: "สิบเอ็ด", en: "Eleven", category: "numbers", image: null },
+  { emoji: "1️⃣2️⃣", th: "สิบสอง", en: "Twelve", category: "numbers", image: null },
+  { emoji: "1️⃣3️⃣", th: "สิบสาม", en: "Thirteen", category: "numbers", image: null },
+  { emoji: "1️⃣4️⃣", th: "สิบสี่", en: "Fourteen", category: "numbers", image: null },
+  { emoji: "1️⃣5️⃣", th: "สิบห้า", en: "Fifteen", category: "numbers", image: null },
+  { emoji: "1️⃣6️⃣", th: "สิบหก", en: "Sixteen", category: "numbers", image: null },
+  { emoji: "1️⃣7️⃣", th: "สิบเจ็ด", en: "Seventeen", category: "numbers", image: null },
+  { emoji: "1️⃣8️⃣", th: "สิบแปด", en: "Eighteen", category: "numbers", image: null },
+  { emoji: "1️⃣9️⃣", th: "สิบเก้า", en: "Nineteen", category: "numbers", image: null },
+  { emoji: "2️⃣0️⃣", th: "ยี่สิบ", en: "Twenty", category: "numbers", image: null },
+
+  // 21-30
+  { emoji: "2️⃣1️⃣", th: "ยี่สิบเอ็ด", en: "Twenty-One", category: "numbers", image: null },
+  { emoji: "2️⃣2️⃣", th: "ยี่สิบสอง", en: "Twenty-Two", category: "numbers", image: null },
+  { emoji: "2️⃣3️⃣", th: "ยี่สิบสาม", en: "Twenty-Three", category: "numbers", image: null },
+  { emoji: "2️⃣4️⃣", th: "ยี่สิบสี่", en: "Twenty-Four", category: "numbers", image: null },
+  { emoji: "2️⃣5️⃣", th: "ยี่สิบห้า", en: "Twenty-Five", category: "numbers", image: null },
+  { emoji: "2️⃣6️⃣", th: "ยี่สิบหก", en: "Twenty-Six", category: "numbers", image: null },
+  { emoji: "2️⃣7️⃣", th: "ยี่สิบเจ็ด", en: "Twenty-Seven", category: "numbers", image: null },
+  { emoji: "2️⃣8️⃣", th: "ยี่สิบแปด", en: "Twenty-Eight", category: "numbers", image: null },
+  { emoji: "2️⃣9️⃣", th: "ยี่สิบเก้า", en: "Twenty-Nine", category: "numbers", image: null },
+  { emoji: "3️⃣0️⃣", th: "สามสิบ", en: "Thirty", category: "numbers", image: null },
+
+  // 31-40
+  { emoji: "3️⃣1️⃣", th: "สามสิบหนึ่ง", en: "Thirty-One", category: "numbers", image: null },
+  { emoji: "3️⃣2️⃣", th: "สามสิบสอง", en: "Thirty-Two", category: "numbers", image: null },
+  { emoji: "3️⃣3️⃣", th: "สามสิบสาม", en: "Thirty-Three", category: "numbers", image: null },
+  { emoji: "3️⃣4️⃣", th: "สามสิบสี่", en: "Thirty-Four", category: "numbers", image: null },
+  { emoji: "3️⃣5️⃣", th: "สามสิบห้า", en: "Thirty-Five", category: "numbers", image: null },
+  { emoji: "3️⃣6️⃣", th: "สามสิบหก", en: "Thirty-Six", category: "numbers", image: null },
+  { emoji: "3️⃣7️⃣", th: "สามสิบเจ็ด", en: "Thirty-Seven", category: "numbers", image: null },
+  { emoji: "3️⃣8️⃣", th: "สามสิบแปด", en: "Thirty-Eight", category: "numbers", image: null },
+  { emoji: "3️⃣9️⃣", th: "สามสิบเก้า", en: "Thirty-Nine", category: "numbers", image: null },
+  { emoji: "4️⃣0️⃣", th: "สี่สิบ", en: "Forty", category: "numbers", image: null },
+
+  // 41-50
+  { emoji: "4️⃣1️⃣", th: "สี่สิบหนึ่ง", en: "Forty-One", category: "numbers", image: null },
+  { emoji: "4️⃣2️⃣", th: "สี่สิบสอง", en: "Forty-Two", category: "numbers", image: null },
+  { emoji: "4️⃣3️⃣", th: "สี่สิบสาม", en: "Forty-Three", category: "numbers", image: null },
+  { emoji: "4️⃣4️⃣", th: "สี่สิบสี่", en: "Forty-Four", category: "numbers", image: null },
+  { emoji: "4️⃣5️⃣", th: "สี่สิบห้า", en: "Forty-Five", category: "numbers", image: null },
+  { emoji: "4️⃣6️⃣", th: "สี่สิบหก", en: "Forty-Six", category: "numbers", image: null },
+  { emoji: "4️⃣7️⃣", th: "สี่สิบเจ็ด", en: "Forty-Seven", category: "numbers", image: null },
+  { emoji: "4️⃣8️⃣", th: "สี่สิบแปด", en: "Forty-Eight", category: "numbers", image: null },
+  { emoji: "4️⃣9️⃣", th: "สี่สิบเก้า", en: "Forty-Nine", category: "numbers", image: null },
+  { emoji: "5️⃣0️⃣", th: "ห้าสิบ", en: "Fifty", category: "numbers", image: null }
+];
