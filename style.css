@@ -101,12 +101,12 @@ body {
   font-size: 3rem;
 }
 
-.category-card .name-th {
+.category-card .name-en {
   font-size: 1.3rem;
   font-weight: 600;
 }
 
-.category-card .name-en {
+.category-card .name-th {
   font-size: 1rem;
   color: #888;
 }

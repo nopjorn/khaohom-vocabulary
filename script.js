@@ -99,8 +99,8 @@ function renderCategories() {
     btn.className = "category-card";
     btn.innerHTML = `
       <div class="icon">${cat.icon}</div>
-      <div class="name-th">${cat.th}</div>
       <div class="name-en">${cat.en}</div>
+      <div class="name-th">${cat.th}</div>
     `;
     btn.addEventListener("click", () => startGame(cat.id));
     el.categoryGrid.appendChild(btn);
@@ -141,7 +141,7 @@ function renderQuestion() {
   if (word.image) {
     const img = document.createElement("img");
     img.src = word.image;
-    img.alt = word.th;
+    img.alt = word.en;
     img.className = "question-image";
     el.emojiDisplay.appendChild(img);
   } else {
@@ -156,7 +156,7 @@ function renderQuestion() {
 
     const listenBtn = document.createElement("button");
     listenBtn.className = "opt-listen";
-    listenBtn.setAttribute("aria-label", `ฟังคำว่า ${opt.th}`);
+    listenBtn.setAttribute("aria-label", `Listen: ${opt.en} (${opt.th})`);
     listenBtn.textContent = "🔊";
     listenBtn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -189,7 +189,7 @@ function handleAnswer(btn, chosen, correctWord) {
 
   if (isCorrect) {
     btn.classList.add("correct");
-    el.feedback.textContent = "เก่งมาก! ถูกต้อง 🎉";
+    el.feedback.textContent = "Correct! เก่งมาก! ถูกต้อง 🎉";
     el.feedback.className = "feedback correct";
     state.correctCount++;
     addStars(1);
@@ -197,7 +197,7 @@ function handleAnswer(btn, chosen, correctWord) {
   } else {
     btn.classList.add("wrong");
     btn.classList.add("shake");
-    el.feedback.textContent = `ไม่ใช่นะ คำตอบคือ ${correctWord.th}`;
+    el.feedback.textContent = `Not quite, the answer is ${correctWord.en} ไม่ใช่นะ คำตอบคือ ${correctWord.th}`;
     el.feedback.className = "feedback wrong";
     allBtns.forEach((b) => {
       if (b._word === correctWord) b.classList.add("correct");
@@ -218,7 +218,7 @@ function handleAnswer(btn, chosen, correctWord) {
 function showResult() {
   window.speechSynthesis.cancel();
   showScreen(el.screenResult);
-  el.resultScore.textContent = `ได้ ${state.correctCount} ดาว จาก ${state.questions.length} ข้อ`;
+  el.resultScore.textContent = `${state.correctCount} / ${state.questions.length} stars ได้ ${state.correctCount} ดาว จาก ${state.questions.length} ข้อ`;
 }
 
 el.btnBack.addEventListener("click", () => {
