@@ -1,7 +1,7 @@
 // Vocaberry game logic
 
 // เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
-const APP_VERSION = "1.3.0";
+const APP_VERSION = "1.4.0";
 
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 8;
@@ -72,7 +72,8 @@ function speak(text, lang, onEnd) {
   if (!("speechSynthesis" in window)) return;
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = lang;
-  utter.rate = 0.9;
+  // utter.rate = 0.9;
+  utter.rate = 0.5;
   // ถ้าเครื่องไม่มีเสียงที่ตรงภาษาเป้าหมายเลย (เช่น Windows ที่ไม่ได้ติดตั้งเสียงไทย)
   // ให้ fallback ไปใช้เสียงอื่นที่มีอยู่แทน ดีกว่าไม่มีเสียงออกมาเลย
   const voice =
