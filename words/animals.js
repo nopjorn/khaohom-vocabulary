@@ -84,9 +84,9 @@ const WORDS_ANIMALS = [
   { emoji: "🐡", th: "ปลาปักเป้า", en: "Pufferfish", category: "animals", image: null },
   { emoji: "🦑", th: "ปลาหมึกกล้วย", en: "Squid", category: "animals", image: null },
   { emoji: "🦪", th: "หอยนางรม", en: "Oyster", category: "animals", image: null },
-  { emoji: " jellyfish" /* 🪼 */, th: "แมงกะพรุน", en: "Jellyfish", category: "animals", image: null },
+  // { emoji: " jellyfish" /* 🪼 */, th: "แมงกะพรุน", en: "Jellyfish", category: "animals", image: null },
   { emoji: "🦭", th: "แมวน้ำ", en: "Seal", category: "animals", image: null },
-  { emoji: " walrus" /* 🦣 */, th: "แมมมอธ", en: "Mammoth", category: "animals", image: null },
+  // { emoji: " walrus" /* 🦣 */, th: "แมมมอธ", en: "Mammoth", category: "animals", image: null },
   { emoji: "🐕‍🦺", th: "สุนัขช่วยเหลือ", en: "Service Dog", category: "animals", image: null },
 
   // 81-100
