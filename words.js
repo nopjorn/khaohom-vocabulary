@@ -76,7 +76,30 @@ const CATEGORIES = [
   { id: "vegetables", th: "ผัก", en: "Vegetables", icon: "🥦" },
   { id: "household", th: "ของใช้ในบ้าน", en: "Household Items", icon: "🧹" },
   { id: "places", th: "สถานที่", en: "Places", icon: "🏠" },
-  { id: "wild-animals", th: "สัตว์ป่า", en: "Wild Animals", icon: "🦁" }
+  { id: "wild-animals", th: "สัตว์ป่า", en: "Wild Animals", icon: "🦁" },
+
+  // --- กลุ่มเพิ่มเติมล่าสุด ---
+  { id: "birds", th: "นก", en: "Birds", icon: "🐦" },
+  { id: "dinosaurs", th: "ไดโนเสาร์", en: "Dinosaurs", icon: "🦕" },
+  { id: "space", th: "อวกาศ", en: "Space", icon: "🚀" },
+  { id: "flowers-plants", th: "ดอกไม้และต้นไม้", en: "Flowers & Plants", icon: "🌸" },
+  { id: "desserts-snacks", th: "ขนมและของว่าง", en: "Desserts & Snacks", icon: "🍪" },
+  { id: "festivals", th: "เทศกาล", en: "Festivals", icon: "🎊" },
+  { id: "opposites", th: "คำตรงข้าม", en: "Opposites", icon: "⬆️" },
+  { id: "farm", th: "ฟาร์ม", en: "Farm", icon: "🚜" },
+
+  // --- กลุ่มเพิ่มเติมรอบใหม่ ---
+  { id: "technology", th: "เทคโนโลยี", en: "Technology", icon: "📱" },
+  { id: "transportation-signs", th: "ป้ายจราจร", en: "Traffic Signs", icon: "🚦" },
+  { id: "actions", th: "คำกริยา", en: "Actions", icon: "🏃" },
+  { id: "money", th: "เงิน", en: "Money", icon: "💰" },
+  { id: "camping-outdoor", th: "แคมป์ปิ้ง", en: "Camping & Outdoor", icon: "⛺" },
+
+  // --- กลุ่มเพิ่มเติมรอบล่าสุด ---
+  { id: "beach-seaside", th: "ชายหาด", en: "Beach & Seaside", icon: "🏖️" },
+  { id: "playground", th: "สนามเด็กเล่น", en: "Playground", icon: "🛝" },
+  { id: "seasons", th: "ฤดูกาล", en: "Seasons", icon: "🍂" },
+  { id: "hospital-health", th: "โรงพยาบาลและสุขภาพ", en: "Hospital & Health", icon: "🩺" }
 ];
 
 // ไฟล์ words/*.js ต้องถูกโหลดก่อนไฟล์นี้ใน index.html
@@ -113,5 +136,22 @@ const WORDS = [
   ...WORDS_VEGETABLES,
   ...WORDS_HOUSEHOLD,
   ...WORDS_PLACES,
-  ...WORDS_WILD_ANIMALS
+  ...WORDS_WILD_ANIMALS,
+  ...WORDS_BIRDS,
+  ...WORDS_DINOSAURS,
+  ...WORDS_SPACE,
+  ...WORDS_FLOWERS_PLANTS,
+  ...WORDS_DESSERTS_SNACKS,
+  ...WORDS_FESTIVALS,
+  ...WORDS_OPPOSITES,
+  ...WORDS_FARM,
+  ...WORDS_TECHNOLOGY,
+  ...WORDS_TRANSPORTATION_SIGNS,
+  ...WORDS_ACTIONS,
+  ...WORDS_MONEY,
+  ...WORDS_CAMPING_OUTDOOR,
+  ...WORDS_BEACH_SEASIDE,
+  ...WORDS_PLAYGROUND,
+  ...WORDS_SEASONS,
+  ...WORDS_HOSPITAL_HEALTH
 ];
