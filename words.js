@@ -5,9 +5,8 @@
 
 const CATEGORIES_REAL = [
   // --- กลุ่มเดิมของคุณ ---
-  // { id: "animals", th: "สัตว์", en: "Animals", icon: "🐶" },
   { id: "animals_r", th: "สัตว์", en: "Animals", icon: "🐶" },
-  // { id: "fruits", th: "ผลไม้", en: "Fruits", icon: "🍎" },
+  { id: "fruits_r", th: "ผลไม้", en: "Fruits", icon: "🍎" },
   // { id: "vehicles", th: "ยานพาหนะ", en: "Vehicles", icon: "🚗" },
   // { id: "colors", th: "สี", en: "Colors", icon: "🎨" },
   // { id: "numbers", th: "ตัวเลข", en: "Numbers", icon: "🔢" },
@@ -45,7 +44,6 @@ const CATEGORIES_REAL = [
 const CATEGORIES = [
   // --- กลุ่มเดิมของคุณ ---
   { id: "animals", th: "สัตว์", en: "Animals", icon: "🐶" },
-  // { id: "animals_r", th: "สัตว์ (จริง)", en: "Animals (Real)", icon: "🐶" },
   { id: "fruits", th: "ผลไม้", en: "Fruits", icon: "🍎" },
   { id: "vehicles", th: "ยานพาหนะ", en: "Vehicles", icon: "🚗" },
   { id: "colors", th: "สี", en: "Colors", icon: "🎨" },
@@ -86,6 +84,7 @@ const WORDS = [
   ...WORDS_ANIMALS,
   ...WORDS_ANIMALS_REAL,
   ...WORDS_FRUITS,
+  ...WORDS_FRUITS_REAL,
   ...WORDS_VEHICLES,
   ...WORDS_COLORS,
   ...WORDS_NUMBERS,
