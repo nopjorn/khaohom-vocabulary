@@ -2,12 +2,45 @@
 // รูปภาพ: Wikimedia Commons (public domain / CC) ลิงก์ตรง ไม่ต้องเก็บไฟล์ในโปรเจกต์
 const WORDS_ANIMALS_REAL = [
   // 1-20 (ข้อมูลเดิมของคุณ)
-  { emoji: "🐶", th: "หมา", en: "Dog", category: "animals_r", image: 'https://images.unsplash.com/photo-1422565096762-bdb997a56a84?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZG9nfGVufDB8MHwwfHx8Mg%3D%3D' },
-  { emoji: "🐱", th: "แมว", en: "Cat", category: "animals_r", image: 'https://images.unsplash.com/photo-1614381016538-5f80a0852fea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIzfHxjYXR8ZW58MHwwfDB8fHwy' },
-  { emoji: "🐘", th: "ช้าง", en: "Elephant", category: "animals_r", image: 'https://images.unsplash.com/photo-1660384479249-8cab2e38bd4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fEVsZXBoYW50fGVufDB8MHwwfHx8Mg%3D%3D' },
-  { emoji: "🦁", th: "สิงโต", en: "Lion", category: "animals_r", image: 'https://images.unsplash.com/photo-1567732310772-bb589efdbb03?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGxpb258ZW58MHwwfDB8fHwy' },
-  { emoji: "🐰", th: "กระต่าย", en: "Rabbit", category: "animals_r", image: 'https://images.unsplash.com/photo-1703437873366-b7a9e54dab56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHJhYmJpdHxlbnwwfDB8MHx8fDI%3D' },
-  { emoji: "🐟", th: "ปลา", en: "Fish", category: "animals_r", image: 'https://images.unsplash.com/photo-1510020904390-f245a6de84f5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGZpc2h8ZW58MHwwfDB8fHwy' },
+  {
+    emoji: "🐶", th: "หมา", en: "Dog", category: "animals_r", images: [
+      'https://images.unsplash.com/photo-1422565096762-bdb997a56a84?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZG9nfGVufDB8MHwwfHx8Mg%3D%3D',
+      'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9nfGVufDB8MHwwfHx8Mg%3D%3D',
+      'https://images.unsplash.com/photo-1556866261-8763a7662333?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGRvZ3xlbnwwfDB8MHx8fDI%3D'
+    ]
+  },
+  {
+    emoji: "🐱", th: "แมว", en: "Cat", category: "animals_r", images: [
+      'https://images.unsplash.com/photo-1614381016538-5f80a0852fea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIzfHxjYXR8ZW58MHwwfDB8fHwy',
+      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2F0fGVufDB8MHwwfHx8Mg%3D%3D',
+      'https://images.unsplash.com/photo-1574063413132-354db9f190fd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fENhdHxlbnwwfDB8MHx8fDI%3D'
+    ]
+  },
+  {
+    emoji: "🐘", th: "ช้าง", en: "Elephant", category: "animals_r", image: [
+      'https://images.unsplash.com/photo-1660384479249-8cab2e38bd4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fEVsZXBoYW50fGVufDB8MHwwfHx8Mg%3D%3D',
+      'https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZWxlcGhhbnR8ZW58MHwwfDB8fHwy',
+      'https://images.unsplash.com/photo-1481464904474-a575a33b44a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVsZXBoYW50fGVufDB8MHwwfHx8Mg%3D%3D'
+    ]
+  },
+  {
+    emoji: "🦁", th: "สิงโต", en: "Lion", category: "animals_r", images: [
+      'https://images.unsplash.com/photo-1567732310772-bb589efdbb03?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGxpb258ZW58MHwwfDB8fHwy',
+      'https://images.unsplash.com/photo-1552410260-0fd9b577afa6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8TGlvbnxlbnwwfDB8MHx8fDI%3D',
+      'https://images.unsplash.com/photo-1583587067350-2c49115673c9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fExpb258ZW58MHwwfDB8fHwy'
+    ]
+  },
+  { emoji: "🐰", th: "กระต่าย", en: "Rabbit", category: "animals_r", images: [
+    'https://images.unsplash.com/photo-1703437873366-b7a9e54dab56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHJhYmJpdHxlbnwwfDB8MHx8fDI%3D',
+    'https://images.unsplash.com/photo-1481500576737-9238440343a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UmFiYml0fGVufDB8MHwwfHx8Mg%3D%3D',
+    'https://images.unsplash.com/photo-1583301286816-f4f05e1e8b25?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fFJhYmJpdHxlbnwwfDB8MHx8fDI%3D'
+  ] },
+  { emoji: "🐟", th: "ปลา", en: "Fish", category: "animals_r", images: [
+    'https://images.unsplash.com/photo-1510020904390-f245a6de84f5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGZpc2h8ZW58MHwwfDB8fHwy',
+    'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8RmlzaHxlbnwwfDB8MHx8fDI%3D',
+    'https://images.unsplash.com/photo-1516408388733-2f8364f2e00b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fEZpc2h8ZW58MHwwfDB8fHwy',
+    'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RmlzaHxlbnwwfDB8MHx8fDI%3D'
+  ] },
   { emoji: "🐔", th: "ไก่", en: "Chicken", category: "animals_r", image: 'https://images.unsplash.com/photo-1619598951257-68e45c835908?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fENoaWNrZW58ZW58MHwwfDB8fHwy' },
   { emoji: "🐸", th: "กบ", en: "Frog", category: "animals_r", image: 'https://images.unsplash.com/photo-1548894817-c0e7f6faaaf2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGZyb2d8ZW58MHwwfDB8fHwy' },
   { emoji: "🐷", th: "หมู", en: "Pig", category: "animals_r", image: 'https://images.unsplash.com/photo-1697027940563-656a71f90a2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHBpZ3xlbnwwfDB8MHx8fDI%3D' },

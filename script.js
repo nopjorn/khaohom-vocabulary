@@ -1,7 +1,7 @@
 // Vocaberry game logic
 
 // เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
-const APP_VERSION = "1.5.4";
+const APP_VERSION = "1.6.0";
 
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 10;
@@ -142,6 +142,13 @@ function startGame(categoryId) {
   renderQuestion();
 }
 
+function pickWordImage(word) {
+  if (Array.isArray(word.images) && word.images.length > 0) {
+    return word.images[Math.floor(Math.random() * word.images.length)];
+  }
+  return word.image || null;
+}
+
 function buildOptions(correctWord) {
   const sameCategory = WORDS.filter(
     (w) => w.category === correctWord.category && w !== correctWord
@@ -159,9 +166,10 @@ function renderQuestion() {
   el.progressDisplay.textContent = `${state.currentIndex + 1} / ${state.questions.length}`;
 
   el.emojiDisplay.innerHTML = "";
-  if (word.image) {
+  const pickedImage = pickWordImage(word);
+  if (pickedImage) {
     const img = document.createElement("img");
-    img.src = word.image;
+    img.src = pickedImage;
     img.alt = word.en;
     img.className = "question-image";
     el.emojiDisplay.appendChild(img);
