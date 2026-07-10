@@ -12,19 +12,19 @@ const CATEGORIES_REAL = [
   // { id: "numbers", th: "ตัวเลข", en: "Numbers", icon: "🔢" },
 
   // // --- ระดับเริ่มต้น (ใกล้ตัวเด็ก) ---
-  // { id: "body", th: "ร่างกาย", en: "Body Parts", icon: "👁️" },
+  { id: "body_r", th: "ร่างกาย", en: "Body Parts", icon: "👁️" },
   // { id: "family", th: "ครอบครัว", en: "Family", icon: "👨‍👩‍👧‍👦" },
-  // { id: "toys", th: "ของเล่น", en: "Toys", icon: "🧸" },
+  { id: "toys_r", th: "ของเล่น", en: "Toys", icon: "🧸" },
 
   // // --- ระดับเริ่มเข้าสังคม / ไปโรงเรียน ---
   // { id: "clothes", th: "เสื้อผ้า", en: "Clothes", icon: "👕" },
-  // { id: "school", th: "โรงเรียน", en: "School", icon: "🎒" },
+  { id: "school_r", th: "โรงเรียน", en: "School", icon: "🎒" },
   // { id: "food", th: "อาหารและเครื่องดื่ม", en: "Food & Drinks", icon: "🥛" },
 
   // // --- ระดับเปิดโลกกว้าง ---
   // { id: "nature", th: "ธรรมชาติ", en: "Nature", icon: "☀️" },
   // { id: "shapes", th: "รูปทรง", en: "Shapes", icon: "📐" },
-  // { id: "jobs", th: "อาชีพ", en: "Jobs", icon: "👩‍⚕️" },
+  { id: "jobs_r", th: "อาชีพ", en: "Jobs", icon: "👩‍⚕️" },
 
   // // --- กลุ่มเพิ่มเติม ---
   // { id: "weather", th: "สภาพอากาศ", en: "Weather", icon: "🌧️" },
@@ -90,14 +90,18 @@ const WORDS = [
   ...WORDS_COLORS,
   ...WORDS_NUMBERS,
   ...WORDS_BODY,
+  ...WORDS_BODY_REAL,
   ...WORDS_FAMILY,
   ...WORDS_TOYS,
+  ...WORDS_TOYS_REAL,
   ...WORDS_CLOTHES,
   ...WORDS_SCHOOL,
+  ...WORDS_SCHOOL_REAL,
   ...WORDS_FOOD,
   ...WORDS_NATURE,
   ...WORDS_SHAPES,
   ...WORDS_JOBS,
+  ...WORDS_JOBS_REAL,
   ...WORDS_WEATHER,
   ...WORDS_ROOMS,
   ...WORDS_INSTRUMENTS,

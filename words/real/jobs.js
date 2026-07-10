@@ -1,0 +1,28 @@
+// คำศัพท์หมวดอาชีพ
+const WORDS_JOBS_REAL = [
+  { emoji: "🧑‍🏫", th: "คุณครู", en: "Teacher", category: "jobs_r", image: 'https://images.unsplash.com/photo-1511629091441-ee46146481b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFRlYWNoZXJ8ZW58MHwwfDB8fHwy' },
+  { emoji: "🧑‍⚕️", th: "คุณหมอ / แพทย์", en: "Doctor", category: "jobs_r", image: 'https://images.unsplash.com/photo-1758691462863-9e1b8a863140?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHxEb2N0b3J8ZW58MHwwfDB8fHwy' },
+  { emoji: "🧑‍⚕️", th: "พยาบาล", en: "Nurse", category: "jobs_r", image: 'https://images.unsplash.com/photo-1758575514475-2a84975db58e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE1fHxOdXJzZXxlbnwwfDB8MHx8fDI%3D' }, // สามารถใช้บริบทร่วมหรือใช้ 🩺 แทนได้
+  { emoji: "🧑‍🍳", th: "พ่อครัว / เชฟ", en: "Chef / Cook", category: "jobs_r", image: 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2hlZnxlbnwwfDB8MHx8fDI%3D' },
+  // { emoji: "🧑‍ปลูก", th: "ชาวนา / เกษตรกร", en: "Farmer", category: "jobs_r", image: null }, // หมายเหตุ: มักใช้ 🧑‍🌾
+  // { emoji: "🧑‍🌾", th: "ชาวนา / ชาวสวน", en: "Farmer", category: "jobs_r", image: null },
+  { emoji: "🧑‍🚀", th: "นักบินอวกาศ", en: "Astronaut", category: "jobs_r", image: 'https://images.unsplash.com/photo-1614726365930-627c75da663e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEFzdHJvbmF1dHxlbnwwfDB8MHx8fDI%3D' },
+  { emoji: "🧑‍✈️", th: "นักบิน", en: "Pilot", category: "jobs_r", image: 'https://images.unsplash.com/photo-1590600424262-38d39f98b898?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UGlsb3R8ZW58MHwwfDB8fHwy' },
+  { emoji: "👮", th: "ตำรวจ", en: "Police Officer", category: "jobs_r", image: 'https://images.unsplash.com/photo-1519276841933-2496a0cb2533?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fFBvbGljZSUyME9mZmljZXJ8ZW58MHwwfDB8fHwy' },
+  { emoji: "🧑‍🚒", th: "นักดับเพลิง", en: "Firefighter", category: "jobs_r", image: 'https://images.unsplash.com/photo-1563062067-7700e1d9ae1d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RmlyZWZpZ2h0ZXJ8ZW58MHwwfDB8fHwy' },
+  { emoji: "🧑‍🎨", th: "ศิลปิน / จิตรกร", en: "Artist", category: "jobs_r", image: 'https://images.unsplash.com/photo-1660092626225-f291ab2970b9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8QXJ0aXN0fGVufDB8MHwwfHx8Mg%3D%3D' },
+  { emoji: "🧑‍🎤", th: "นักร้อง", en: "Singer", category: "jobs_r", image: 'https://images.unsplash.com/photo-1517230878791-4d28214057c2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8U2luZ2VyfGVufDB8MHwwfHx8Mg%3D%3D' },
+  { emoji: "🧑‍💻", th: "โปรแกรมเมอร์ / นักพัฒนาซอฟต์แวร์", en: "Developer / Programmer", category: "jobs_r", image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fERldmVsb3BlcnxlbnwwfDB8MHx8fDI%3D' },
+  { emoji: "🧑‍ดนตรี", th: "นักดนตรี", en: "Musician", category: "jobs_r", image: 'https://images.unsplash.com/photo-1605722243979-fe0be8158232?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TXVzaWNpYW58ZW58MHwwfDB8fHwy' }, // หมายเหตุ: มักใช้ 🧑‍🎤 หรือร่วมกับเครื่องดนตรีเช่น 🎸
+  // { emoji: "🧑‍💼", th: "พนักงานออฟฟิศ / นักธุรกิจ", en: "Office Worker", category: "jobs_r", image: null },
+  // { emoji: "🧑‍🔧", th: "ช่างซ่อมเครื่องยนต์ / ช่างเทคนิค", en: "Mechanic", category: "jobs_r", image: null },
+  { emoji: "🧑‍🔬", th: "นักวิทยาศาสตร์", en: "Scientist", category: "jobs_r", image: 'https://images.unsplash.com/photo-1624957866304-b0dee1955e29?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fFNjaWVudGlzdHxlbnwwfDB8MHx8fDI%3D' },
+  // { emoji: "🧑‍อด", th: "ผู้พิพากษา", en: "Judge", category: "jobs_r", image: null }, // มักใช้ 🧑‍⚖️
+  // { emoji: "🧑‍⚖️", th: "ผู้พิพากษา / ทนายความ", en: "Judge", category: "jobs_r", image: null },
+  { emoji: "🧑‍🎨", th: "ช่างตัดผม", en: "Hairdresser", category: "jobs_r", image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8SGFpcmRyZXNzZXJ8ZW58MHwwfDB8fHwy' }, // สามารถใช้ 💇 หรือ 💈 ร่วมได้
+  { emoji: "🕵️", th: "นักสืบ", en: "Detective", category: "jobs_r", image: 'https://images.unsplash.com/photo-1600465102847-f5aa86d9b026?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8RGV0ZWN0aXZlfGVufDB8MHwwfHx8Mg%3D%3D' },
+  { emoji: "💂", th: "ทหารรักษาพระองค์ / ทหาร", en: "Guard / Soldier", category: "jobs_r", image: 'https://images.unsplash.com/photo-1541513982013-5dc4f56697f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8U29sZGllcnxlbnwwfDB8MHx8fDI%3D' },
+  // { emoji: "🧑‍วิศว", th: "วิศวกร / ช่างก่อสร้าง", en: "Construction Worker", category: "jobs_r", image: null } // มักใช้ 🧑‍🏭 หรือ 👷
+  { emoji: "🧑‍วิศว", th: "ช่างก่อสร้าง", en: "Construction Worker", category: "jobs_r", image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q29uc3RydWN0aW9uJTIwV29ya2VyfGVufDB8MHwwfHx8Mg%3D%3D' }, // มักใช้ 🧑‍🏭 หรือ 👷
+  { emoji: "🧑‍วิศว", th: "วิศวกร", en: "Engineer", category: "jobs_r", image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RW5naW5lZXJ8ZW58MHwwfDB8fHwy' } // มักใช้ 🧑‍🏭 หรือ 👷
+];
