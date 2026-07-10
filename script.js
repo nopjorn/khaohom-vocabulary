@@ -19,6 +19,7 @@ const el = {
   screenMenu: document.getElementById("screen-menu"),
   screenGame: document.getElementById("screen-game"),
   screenResult: document.getElementById("screen-result"),
+  categoryGridReal: document.getElementById("categoryGridReal"),
   categoryGrid: document.getElementById("categoryGrid"),
   starDisplay: document.getElementById("starDisplay"),
   progressDisplay: document.getElementById("progressDisplay"),
@@ -97,6 +98,19 @@ function shuffle(arr) {
 }
 
 function renderCategories() {
+  el.categoryGridReal.innerHTML = "";
+  CATEGORIES_REAL.forEach((cat) => {
+    const btn = document.createElement("button");
+    btn.className = "category-card";
+    btn.innerHTML = `
+      <div class="icon">${cat.icon}</div>
+      <div class="name-en">${cat.en}</div>
+      <div class="name-th">${cat.th}</div>
+    `;
+    btn.addEventListener("click", () => startGame(cat.id));
+    el.categoryGridReal.appendChild(btn);
+  });
+
   el.categoryGrid.innerHTML = "";
   CATEGORIES.forEach((cat) => {
     const btn = document.createElement("button");
