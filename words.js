@@ -6,6 +6,7 @@
 const CATEGORIES = [
   // --- กลุ่มเดิมของคุณ ---
   { id: "animals", th: "สัตว์", en: "Animals", icon: "🐶" },
+  { id: "animals_r", th: "สัตว์ (จริง)", en: "Animals (Real)", icon: "🐶" },
   { id: "fruits", th: "ผลไม้", en: "Fruits", icon: "🍎" },
   { id: "vehicles", th: "ยานพาหนะ", en: "Vehicles", icon: "🚗" },
   { id: "colors", th: "สี", en: "Colors", icon: "🎨" },
@@ -44,6 +45,7 @@ const CATEGORIES = [
 // ไฟล์ words/*.js ต้องถูกโหลดก่อนไฟล์นี้ใน index.html
 const WORDS = [
   ...WORDS_ANIMALS,
+  ...WORDS_ANIMALS_REAL,
   ...WORDS_FRUITS,
   ...WORDS_VEHICLES,
   ...WORDS_COLORS,
