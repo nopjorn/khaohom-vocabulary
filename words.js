@@ -7,7 +7,7 @@ const CATEGORIES_REAL = [
   // --- กลุ่มเดิมของคุณ ---
   { id: "animals_r", th: "สัตว์", en: "Animals", icon: "🐶" },
   { id: "fruits_r", th: "ผลไม้", en: "Fruits", icon: "🍎" },
-  // { id: "vehicles", th: "ยานพาหนะ", en: "Vehicles", icon: "🚗" },
+  { id: "vehicles_r", th: "ยานพาหนะ", en: "Vehicles", icon: "🚗" },
   // { id: "colors", th: "สี", en: "Colors", icon: "🎨" },
   // { id: "numbers", th: "ตัวเลข", en: "Numbers", icon: "🔢" },
 
@@ -86,6 +86,7 @@ const WORDS = [
   ...WORDS_FRUITS,
   ...WORDS_FRUITS_REAL,
   ...WORDS_VEHICLES,
+  ...WORDS_VEHICLES_REAL,
   ...WORDS_COLORS,
   ...WORDS_NUMBERS,
   ...WORDS_BODY,
