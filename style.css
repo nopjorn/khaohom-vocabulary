@@ -518,6 +518,46 @@ body {
   }
 }
 
+@media (min-width: 900px) {
+  #screen-game {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-areas:
+      "header header"
+      "question options"
+      "feedback feedback";
+    align-items: center;
+    gap: 24px;
+  }
+
+  #screen-game .game-header {
+    grid-area: header;
+  }
+
+  #screen-game .question-card {
+    grid-area: question;
+    min-height: 320px;
+  }
+
+  #screen-game .question-card .emoji-display {
+    font-size: 10rem;
+  }
+
+  #screen-game .question-card .question-image {
+    max-height: 360px;
+  }
+
+  #screen-game .options-grid {
+    grid-area: options;
+    margin-bottom: 0;
+  }
+
+  #screen-game .feedback {
+    grid-area: feedback;
+  }
+}
+
 .app-footer {
   text-align: center;
   font-size: 0.75rem;
