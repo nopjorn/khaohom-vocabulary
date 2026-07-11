@@ -519,7 +519,7 @@ body {
 }
 
 @media (min-width: 900px) {
-  #screen-game {
+  #screen-game.active {
     max-width: none;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
