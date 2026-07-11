@@ -1,7 +1,7 @@
 // Vocaberry game logic
 
 // เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
-const APP_VERSION = "1.7.1";
+const APP_VERSION = "1.7.3";
 
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 10;
@@ -24,6 +24,8 @@ const el = {
   categoryGrid: document.getElementById("categoryGrid"),
   btnReview: document.getElementById("btnReview"),
   btnReviewBack: document.getElementById("btnReviewBack"),
+  btnReviewExpandAll: document.getElementById("btnReviewExpandAll"),
+  btnReviewCollapseAll: document.getElementById("btnReviewCollapseAll"),
   reviewContent: document.getElementById("reviewContent"),
   starDisplay: document.getElementById("starDisplay"),
   progressDisplay: document.getElementById("progressDisplay"),
@@ -133,14 +135,30 @@ function renderCategories() {
 
 function renderReviewScreen() {
   el.reviewContent.innerHTML = "";
-  [...CATEGORIES_REAL, ...CATEGORIES].forEach((cat) => {
+  const sections = [
+    { label: "📷 รูปจริง (Real)", cats: CATEGORIES_REAL },
+    { label: "😀 Emoji", cats: CATEGORIES },
+  ];
+  sections.forEach((section, sectionIndex) => {
+    if (sectionIndex > 0) {
+      const hr = document.createElement("hr");
+      hr.className = "review-section-divider";
+      el.reviewContent.appendChild(hr);
+    }
+    const heading = document.createElement("h3");
+    heading.className = "review-section-heading";
+    heading.textContent = section.label;
+    el.reviewContent.appendChild(heading);
+
+    section.cats.forEach((cat) => {
     const words = WORDS.filter((w) => w.category === cat.id);
     if (words.length === 0) return;
 
-    const group = document.createElement("div");
+    const group = document.createElement("details");
     group.className = "review-group";
+    group.open = true;
 
-    const title = document.createElement("h2");
+    const title = document.createElement("summary");
     title.className = "review-group-title";
     title.innerHTML = `${cat.icon} ${cat.en} / ${cat.th} <span class="count">(${words.length})</span>`;
     group.appendChild(title);
@@ -187,6 +205,7 @@ function renderReviewScreen() {
     });
     group.appendChild(grid);
     el.reviewContent.appendChild(group);
+    });
   });
 }
 
@@ -348,3 +367,10 @@ el.btnReview.addEventListener("click", () => {
   showScreen(el.screenReview);
 });
 el.btnReviewBack.addEventListener("click", () => showScreen(el.screenMenu));
+
+el.btnReviewExpandAll.addEventListener("click", () => {
+  el.reviewContent.querySelectorAll(".review-group").forEach((g) => (g.open = true));
+});
+el.btnReviewCollapseAll.addEventListener("click", () => {
+  el.reviewContent.querySelectorAll(".review-group").forEach((g) => (g.open = false));
+});

@@ -388,6 +388,19 @@ body {
   margin-bottom: 20px;
 }
 
+.review-section-heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #666;
+  margin: 0 0 16px;
+}
+
+.review-section-divider {
+  border: none;
+  border-top: 2px dashed #ddd;
+  margin: 32px 0;
+}
+
 .review-group {
   margin-bottom: 32px;
 }
@@ -399,6 +412,23 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.review-group-title::-webkit-details-marker {
+  display: none;
+}
+
+.review-group-title::before {
+  content: "▶";
+  font-size: 0.9rem;
+  transition: transform 0.15s ease;
+}
+
+.review-group[open] > .review-group-title::before {
+  transform: rotate(90deg);
 }
 
 .review-group-title .count {
