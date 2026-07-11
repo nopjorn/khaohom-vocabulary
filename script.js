@@ -1,7 +1,7 @@
 // Vocaberry game logic
 
 // เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
-const APP_VERSION = "1.7.3";
+const APP_VERSION = "1.8.0";
 
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 10;
@@ -15,13 +15,33 @@ let state = {
   locked: false,
 };
 
+// เกมฟังเสียงทายภาพ (แยก state ออกจากเกมทายคำเดิมเพราะ flow ต่างกัน)
+let listenState = {
+  category: null,
+  questions: [],
+  currentIndex: 0,
+  correctCount: 0,
+  locked: false,
+};
+
 const el = {
   screenMenu: document.getElementById("screen-menu"),
   screenGame: document.getElementById("screen-game"),
   screenResult: document.getElementById("screen-result"),
   screenReview: document.getElementById("screen-review"),
+  screenListenMenu: document.getElementById("screen-listen-menu"),
+  screenListenGame: document.getElementById("screen-listen-game"),
   categoryGridReal: document.getElementById("categoryGridReal"),
   categoryGrid: document.getElementById("categoryGrid"),
+  listenCategoryGrid: document.getElementById("listenCategoryGrid"),
+  btnListenMode: document.getElementById("btnListenMode"),
+  btnListenMenuBack: document.getElementById("btnListenMenuBack"),
+  btnListenBack: document.getElementById("btnListenBack"),
+  btnListenReplay: document.getElementById("btnListenReplay"),
+  listenProgressDisplay: document.getElementById("listenProgressDisplay"),
+  listenPromptText: document.getElementById("listenPromptText"),
+  listenOptionsGrid: document.getElementById("listenOptionsGrid"),
+  listenFeedback: document.getElementById("listenFeedback"),
   btnReview: document.getElementById("btnReview"),
   btnReviewBack: document.getElementById("btnReviewBack"),
   btnReviewExpandAll: document.getElementById("btnReviewExpandAll"),
@@ -43,10 +63,20 @@ const el = {
 
 el.appVersion.textContent = APP_VERSION;
 
+const ALL_SCREENS = [
+  el.screenMenu,
+  el.screenGame,
+  el.screenResult,
+  el.screenReview,
+  el.screenListenMenu,
+  el.screenListenGame,
+];
+
+// เกมไหน "เล่นอีกครั้ง" ต่อจากหน้าสรุปผล อัปเดตตัวนี้ก่อนเรียก showResult()
+let playAgainHandler = () => startGame(state.category);
+
 function showScreen(name) {
-  [el.screenMenu, el.screenGame, el.screenResult, el.screenReview].forEach((s) =>
-    s.classList.remove("active")
-  );
+  ALL_SCREENS.forEach((s) => s.classList.remove("active"));
   name.classList.add("active");
 }
 
@@ -133,6 +163,21 @@ function renderCategories() {
   });
 }
 
+function renderListenCategories() {
+  el.listenCategoryGrid.innerHTML = "";
+  CATEGORIES.forEach((cat) => {
+    const btn = document.createElement("button");
+    btn.className = "category-card";
+    btn.innerHTML = `
+      <div class="icon">${cat.icon}</div>
+      <div class="name-en">${cat.en}</div>
+      <div class="name-th">${cat.th}</div>
+    `;
+    btn.addEventListener("click", () => startListenGame(cat.id));
+    el.listenCategoryGrid.appendChild(btn);
+  });
+}
+
 function renderReviewScreen() {
   el.reviewContent.innerHTML = "";
   const sections = [
@@ -211,6 +256,7 @@ function renderReviewScreen() {
 
 renderStars();
 renderCategories();
+renderListenCategories();
 
 function startGame(categoryId) {
   const pool = WORDS.filter((w) => w.category === categoryId);
@@ -340,8 +386,107 @@ function handleAnswer(btn, chosen, correctWord) {
 
 function showResult() {
   window.speechSynthesis.cancel();
+  playAgainHandler = () => startGame(state.category);
   showScreen(el.screenResult);
   el.resultScore.textContent = `${state.correctCount} / ${state.questions.length} stars ได้ ${state.correctCount} ดาว จาก ${state.questions.length} ข้อ`;
+}
+
+function startListenGame(categoryId) {
+  const pool = WORDS.filter((w) => w.category === categoryId);
+  const count = Math.min(QUESTIONS_PER_ROUND, pool.length);
+  listenState = {
+    category: categoryId,
+    questions: shuffle(pool).slice(0, count),
+    currentIndex: 0,
+    correctCount: 0,
+    locked: false,
+  };
+  showScreen(el.screenListenGame);
+  renderListenQuestion();
+}
+
+function speakListenWord() {
+  const word = listenState.questions[listenState.currentIndex];
+  if (word) speak(word.en, "en-US");
+}
+
+function renderListenQuestion() {
+  listenState.locked = false;
+  el.listenFeedback.textContent = "";
+  el.listenFeedback.className = "feedback";
+
+  const word = listenState.questions[listenState.currentIndex];
+  el.listenProgressDisplay.textContent = `${listenState.currentIndex + 1} / ${listenState.questions.length}`;
+  el.listenPromptText.textContent = word.en;
+
+  const options = buildOptions(word);
+  el.listenOptionsGrid.innerHTML = "";
+  options.forEach((opt) => {
+    const btn = document.createElement("button");
+    btn.className = "image-option-btn";
+    btn._word = opt;
+
+    const pickedImage = pickWordImage(opt);
+    if (pickedImage) {
+      const img = document.createElement("img");
+      img.src = pickedImage;
+      img.alt = opt.en;
+      btn.appendChild(img);
+    } else {
+      const span = document.createElement("span");
+      span.className = "image-option-emoji";
+      span.textContent = opt.emoji;
+      btn.appendChild(span);
+    }
+
+    btn.addEventListener("click", () => handleListenAnswer(btn, opt, word));
+    el.listenOptionsGrid.appendChild(btn);
+  });
+
+  speakListenWord();
+}
+
+function handleListenAnswer(btn, chosen, correctWord) {
+  if (listenState.locked) return;
+  listenState.locked = true;
+
+  const isCorrect = chosen === correctWord;
+  const allBtns = el.listenOptionsGrid.querySelectorAll(".image-option-btn");
+  allBtns.forEach((b) => (b.disabled = true));
+
+  if (isCorrect) {
+    btn.classList.add("correct");
+    el.listenFeedback.textContent = "Correct! เก่งมาก! ถูกต้อง 🎉";
+    el.listenFeedback.className = "feedback correct";
+    listenState.correctCount++;
+    addStars(1);
+    speak("เก่งมาก", "th-TH");
+  } else {
+    btn.classList.add("wrong");
+    btn.classList.add("shake");
+    el.listenFeedback.textContent = `Not quite, the answer is ${correctWord.en} ไม่ใช่นะ คำตอบคือ ${correctWord.th}`;
+    el.listenFeedback.className = "feedback wrong";
+    allBtns.forEach((b) => {
+      if (b._word === correctWord) b.classList.add("correct");
+    });
+    speak(`The answer is ${correctWord.en}`, "en-US");
+  }
+
+  setTimeout(() => {
+    listenState.currentIndex++;
+    if (listenState.currentIndex < listenState.questions.length) {
+      renderListenQuestion();
+    } else {
+      showListenResult();
+    }
+  }, 1600);
+}
+
+function showListenResult() {
+  window.speechSynthesis.cancel();
+  playAgainHandler = () => startListenGame(listenState.category);
+  showScreen(el.screenResult);
+  el.resultScore.textContent = `${listenState.correctCount} / ${listenState.questions.length} stars ได้ ${listenState.correctCount} ดาว จาก ${listenState.questions.length} ข้อ`;
 }
 
 el.btnBack.addEventListener("click", () => {
@@ -359,8 +504,16 @@ el.btnSpeakTh.addEventListener("click", () => {
   if (word) speak(word.th, "th-TH");
 });
 
-el.btnPlayAgain.addEventListener("click", () => startGame(state.category));
+el.btnPlayAgain.addEventListener("click", () => playAgainHandler());
 el.btnMenu.addEventListener("click", () => showScreen(el.screenMenu));
+
+el.btnListenMode.addEventListener("click", () => showScreen(el.screenListenMenu));
+el.btnListenMenuBack.addEventListener("click", () => showScreen(el.screenMenu));
+el.btnListenBack.addEventListener("click", () => {
+  window.speechSynthesis.cancel();
+  showScreen(el.screenListenMenu);
+});
+el.btnListenReplay.addEventListener("click", () => speakListenWord());
 
 el.btnReview.addEventListener("click", () => {
   renderReviewScreen();

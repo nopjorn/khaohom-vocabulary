@@ -300,6 +300,69 @@ body {
   color: var(--pink);
 }
 
+/* หน้าเกมฟังเสียงทายภาพ */
+.listen-prompt-icon {
+  font-size: 5rem;
+  line-height: 1;
+  animation: pop-in 0.3s ease;
+}
+
+.image-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 480px) {
+  .image-options-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.image-option-btn {
+  background: white;
+  border: 4px solid transparent;
+  border-radius: 20px;
+  padding: 18px;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  transition: transform 0.1s ease;
+}
+
+.image-option-btn:active {
+  transform: scale(0.97);
+}
+
+.image-option-btn img {
+  max-width: 100%;
+  max-height: 100px;
+  border-radius: 12px;
+}
+
+.image-option-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.image-option-btn.correct {
+  border-color: var(--green);
+  background: #eaffed;
+}
+
+.image-option-btn.wrong {
+  border-color: var(--pink);
+  background: #ffe9ee;
+}
+
+.image-option-btn:disabled {
+  cursor: default;
+}
+
 /* หน้าสรุปผล */
 #screen-result {
   align-items: center;

@@ -28,6 +28,7 @@
       <h1 class="title">Choose a category! เลือกหมวดที่อยากเล่น!</h1>
       <div class="menu-toolbar">
         <button class="btn-secondary" id="btnReview">🖼️ ดูคำศัพท์ทั้งหมด (เช็ครูป/emoji)</button>
+        <button class="btn-secondary" id="btnListenMode">🎧 เกมฟังเสียงทายภาพ</button>
       </div>
       <div class="category-grid" id="categoryGridReal"></div>
       <hr style="margin: 30px 0;"/>
@@ -45,6 +46,32 @@
         <button class="btn-secondary" id="btnReviewCollapseAll">🔼 ย่อทั้งหมด</button>
       </div>
       <div id="reviewContent"></div>
+    </section>
+
+    <!-- หน้าจอเลือกหมวดหมู่ของเกมฟังเสียงทายภาพ -->
+    <section id="screen-listen-menu" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btnListenMenuBack">← Back กลับ</button>
+        <div class="progress">Listen &amp; Choose ฟังแล้วเลือกภาพ</div>
+      </div>
+      <div class="category-grid" id="listenCategoryGrid"></div>
+    </section>
+
+    <!-- หน้าจอเล่นเกมฟังเสียงทายภาพ -->
+    <section id="screen-listen-game" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btnListenBack">← Back กลับ</button>
+        <div class="progress" id="listenProgressDisplay">1 / 8</div>
+        <button class="btn-speak" id="btnListenReplay">🔊 ฟังอีกครั้ง</button>
+      </div>
+
+      <div class="question-card">
+        <div class="listen-prompt-icon" id="listenPromptText">🎧</div>
+      </div>
+
+      <div class="image-options-grid" id="listenOptionsGrid"></div>
+
+      <div class="feedback" id="listenFeedback"></div>
     </section>
 
     <!-- หน้าจอเล่นเกม -->
