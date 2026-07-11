@@ -35,7 +35,7 @@ const CATEGORIES_REAL = [
   // { id: "time", th: "เวลาและวัน", en: "Time & Days", icon: "🌅" },
   // { id: "sea-animals", th: "สัตว์น้ำ", en: "Sea Animals", icon: "🐋" },
   // { id: "emotions", th: "อารมณ์", en: "Emotions", icon: "😄" },
-  // { id: "vegetables", th: "ผัก", en: "Vegetables", icon: "🥦" },
+  { id: "vegetables_r", th: "ผัก", en: "Vegetables", icon: "🥦" },
   // { id: "household", th: "ของใช้ในบ้าน", en: "Household Items", icon: "🧹" },
   // { id: "places", th: "สถานที่", en: "Places", icon: "🏠" },
   // { id: "wild-animals", th: "สัตว์ป่า", en: "Wild Animals", icon: "🦁" }
@@ -120,6 +120,7 @@ const WORDS = [
   ...WORDS_FRUITS,
   ...WORDS_FRUITS_REAL,
   ...WORDS_VEGETABLES,
+  ...WORDS_VEGETABLES_REAL,
   ...WORDS_FOOD,
   ...WORDS_DESSERTS_SNACKS,
   ...WORDS_FLOWERS_PLANTS,
