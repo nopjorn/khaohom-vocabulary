@@ -5,7 +5,9 @@
       "WebSearch",
       "WebFetch(domain:commons.wikimedia.org)",
       "WebFetch(domain:upload.wikimedia.org)",
-      "Bash(curl -s -A \"VocaberryBot/1.0\" \"https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=carrot%20vegetable&gsrnamespace=6&gsrlimit=3&prop=imageinfo&iiprop=url&iiurlwidth=250&format=json\")"
+      "Bash(curl -s -A \"VocaberryBot/1.0\" \"https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=carrot%20vegetable&gsrnamespace=6&gsrlimit=3&prop=imageinfo&iiprop=url&iiurlwidth=250&format=json\")",
+      "Bash(python -m http.server 5173)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/index.html)"
     ]
   }
 }

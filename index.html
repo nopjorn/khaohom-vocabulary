@@ -26,9 +26,21 @@
     <!-- หน้าจอเลือกหมวดหมู่ -->
     <section id="screen-menu" class="screen active">
       <h1 class="title">Choose a category! เลือกหมวดที่อยากเล่น!</h1>
+      <div class="menu-toolbar">
+        <button class="btn-secondary" id="btnReview">🖼️ ดูคำศัพท์ทั้งหมด (เช็ครูป/emoji)</button>
+      </div>
       <div class="category-grid" id="categoryGridReal"></div>
       <hr style="margin: 30px 0;"/>
       <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <!-- หน้าจอเช็คคำศัพท์ทั้งหมดในแต่ละกลุ่ม -->
+    <section id="screen-review" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btnReviewBack">← Back กลับ</button>
+        <div class="progress">Word Review เช็คคำศัพท์</div>
+      </div>
+      <div id="reviewContent"></div>
     </section>
 
     <!-- หน้าจอเล่นเกม -->

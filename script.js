@@ -1,7 +1,7 @@
 // Vocaberry game logic
 
 // เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
-const APP_VERSION = "1.6.1";
+const APP_VERSION = "1.7.1";
 
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 10;
@@ -19,8 +19,12 @@ const el = {
   screenMenu: document.getElementById("screen-menu"),
   screenGame: document.getElementById("screen-game"),
   screenResult: document.getElementById("screen-result"),
+  screenReview: document.getElementById("screen-review"),
   categoryGridReal: document.getElementById("categoryGridReal"),
   categoryGrid: document.getElementById("categoryGrid"),
+  btnReview: document.getElementById("btnReview"),
+  btnReviewBack: document.getElementById("btnReviewBack"),
+  reviewContent: document.getElementById("reviewContent"),
   starDisplay: document.getElementById("starDisplay"),
   progressDisplay: document.getElementById("progressDisplay"),
   emojiDisplay: document.getElementById("emojiDisplay"),
@@ -38,7 +42,9 @@ const el = {
 el.appVersion.textContent = APP_VERSION;
 
 function showScreen(name) {
-  [el.screenMenu, el.screenGame, el.screenResult].forEach((s) => s.classList.remove("active"));
+  [el.screenMenu, el.screenGame, el.screenResult, el.screenReview].forEach((s) =>
+    s.classList.remove("active")
+  );
   name.classList.add("active");
 }
 
@@ -122,6 +128,65 @@ function renderCategories() {
     `;
     btn.addEventListener("click", () => startGame(cat.id));
     el.categoryGrid.appendChild(btn);
+  });
+}
+
+function renderReviewScreen() {
+  el.reviewContent.innerHTML = "";
+  [...CATEGORIES_REAL, ...CATEGORIES].forEach((cat) => {
+    const words = WORDS.filter((w) => w.category === cat.id);
+    if (words.length === 0) return;
+
+    const group = document.createElement("div");
+    group.className = "review-group";
+
+    const title = document.createElement("h2");
+    title.className = "review-group-title";
+    title.innerHTML = `${cat.icon} ${cat.en} / ${cat.th} <span class="count">(${words.length})</span>`;
+    group.appendChild(title);
+
+    const grid = document.createElement("div");
+    grid.className = "review-word-grid";
+    words.forEach((word) => {
+      const card = document.createElement("div");
+      card.className = "review-word-card";
+      if (!word.emoji && !word.image && !(Array.isArray(word.images) && word.images.length)) {
+        card.classList.add("missing-image");
+      }
+
+      const media = document.createElement("div");
+      media.className = "review-word-media";
+      const images = Array.isArray(word.images) && word.images.length
+        ? word.images
+        : word.image
+        ? [word.image]
+        : [];
+      if (images.length) {
+        images.forEach((src) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = word.en;
+          media.appendChild(img);
+        });
+      } else {
+        media.textContent = word.emoji || "❓";
+      }
+      card.appendChild(media);
+
+      const en = document.createElement("div");
+      en.className = "review-word-en";
+      en.textContent = word.en;
+      card.appendChild(en);
+
+      const th = document.createElement("div");
+      th.className = "review-word-th";
+      th.textContent = word.th;
+      card.appendChild(th);
+
+      grid.appendChild(card);
+    });
+    group.appendChild(grid);
+    el.reviewContent.appendChild(group);
   });
 }
 
@@ -277,3 +342,9 @@ el.btnSpeakTh.addEventListener("click", () => {
 
 el.btnPlayAgain.addEventListener("click", () => startGame(state.category));
 el.btnMenu.addEventListener("click", () => showScreen(el.screenMenu));
+
+el.btnReview.addEventListener("click", () => {
+  renderReviewScreen();
+  showScreen(el.screenReview);
+});
+el.btnReviewBack.addEventListener("click", () => showScreen(el.screenMenu));
