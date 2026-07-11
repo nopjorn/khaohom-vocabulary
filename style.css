@@ -78,6 +78,13 @@ body {
   margin: 8px 0 24px;
 }
 
+.section-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 8px 0 16px;
+}
+
 /* หน้าเลือกหมวดหมู่ */
 .category-grid {
   display: grid;
@@ -194,6 +201,80 @@ body {
   max-width: 100%;
   max-height: 220px;
   border-radius: 20px;
+}
+
+.math-question {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  user-select: none;
+  animation: pop-in 0.3s ease;
+}
+
+.math-question-emoji {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: initial;
+  font-weight: initial;
+}
+
+.math-emoji-operand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.math-emoji-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 220px;
+}
+
+.math-emoji-item {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.math-emoji-op {
+  font-size: 2.5rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.math-emoji-count {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #888;
+}
+
+.option-btn-emoji {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+}
+
+.option-btn-emoji .math-emoji-group {
+  max-width: 180px;
+}
+
+.option-btn-emoji .math-emoji-item {
+  font-size: 1.3rem;
+}
+
+.option-btn-emoji .math-emoji-count {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: inherit;
 }
 
 .options-grid {

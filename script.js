@@ -1,7 +1,7 @@
 // Vocaberry game logic
 
 // เพิ่มเลขนี้ทุกครั้งที่แก้โค้ด จะได้เช็คจากมุมล่างของหน้าเว็บว่าเห็นเวอร์ชันล่าสุดหรือยัง
-const APP_VERSION = "1.8.0";
+const APP_VERSION = "1.11.0";
 
 const STORAGE_KEY = "vocaberry_stars";
 const QUESTIONS_PER_ROUND = 10;
@@ -18,6 +18,25 @@ let state = {
 // เกมฟังเสียงทายภาพ (แยก state ออกจากเกมทายคำเดิมเพราะ flow ต่างกัน)
 let listenState = {
   category: null,
+  questions: [],
+  currentIndex: 0,
+  correctCount: 0,
+  locked: false,
+};
+
+// เกมคณิตศาสตร์ (บวก-ลบเลข) โจทย์สุ่มขึ้นเองแทนการดึงจาก WORDS
+const MATH_MODES = [
+  { id: "addition", th: "บวกเลข", en: "Addition", icon: "➕" },
+  { id: "subtraction", th: "ลบเลข", en: "Subtraction", icon: "➖" },
+  { id: "mixed", th: "บวก-ลบผสม", en: "Mixed", icon: "🔢" },
+];
+
+const MATH_EMOJI_POOL = ["🍓", "🍎", "🍌", "⭐", "🐶", "🎈"];
+
+let mathState = {
+  mode: null,
+  displayStyle: "digits",
+  emoji: MATH_EMOJI_POOL[0],
   questions: [],
   currentIndex: 0,
   correctCount: 0,
@@ -42,6 +61,17 @@ const el = {
   listenPromptText: document.getElementById("listenPromptText"),
   listenOptionsGrid: document.getElementById("listenOptionsGrid"),
   listenFeedback: document.getElementById("listenFeedback"),
+  screenMathMenu: document.getElementById("screen-math-menu"),
+  screenMathGame: document.getElementById("screen-math-game"),
+  mathModeGridEmoji: document.getElementById("mathModeGridEmoji"),
+  mathModeGridDigits: document.getElementById("mathModeGridDigits"),
+  btnMathMode: document.getElementById("btnMathMode"),
+  btnMathMenuBack: document.getElementById("btnMathMenuBack"),
+  btnMathBack: document.getElementById("btnMathBack"),
+  mathProgressDisplay: document.getElementById("mathProgressDisplay"),
+  mathQuestionDisplay: document.getElementById("mathQuestionDisplay"),
+  mathOptionsGrid: document.getElementById("mathOptionsGrid"),
+  mathFeedback: document.getElementById("mathFeedback"),
   btnReview: document.getElementById("btnReview"),
   btnReviewBack: document.getElementById("btnReviewBack"),
   btnReviewExpandAll: document.getElementById("btnReviewExpandAll"),
@@ -70,6 +100,8 @@ const ALL_SCREENS = [
   el.screenReview,
   el.screenListenMenu,
   el.screenListenGame,
+  el.screenMathMenu,
+  el.screenMathGame,
 ];
 
 // เกมไหน "เล่นอีกครั้ง" ต่อจากหน้าสรุปผล อัปเดตตัวนี้ก่อนเรียก showResult()
@@ -254,9 +286,29 @@ function renderReviewScreen() {
   });
 }
 
+function renderMathModes(grid, displayStyle) {
+  grid.innerHTML = "";
+  MATH_MODES.forEach((mode) => {
+    const btn = document.createElement("button");
+    btn.className = "category-card";
+    btn.innerHTML = `
+      <div class="icon">${mode.icon}</div>
+      <div class="name-en">${mode.en}</div>
+      <div class="name-th">${mode.th}</div>
+    `;
+    btn.addEventListener("click", () => {
+      mathState.displayStyle = displayStyle;
+      startMathGame(mode.id);
+    });
+    grid.appendChild(btn);
+  });
+}
+
 renderStars();
 renderCategories();
 renderListenCategories();
+renderMathModes(el.mathModeGridEmoji, "emoji");
+renderMathModes(el.mathModeGridDigits, "digits");
 
 function startGame(categoryId) {
   const pool = WORDS.filter((w) => w.category === categoryId);
@@ -489,6 +541,178 @@ function showListenResult() {
   el.resultScore.textContent = `${listenState.correctCount} / ${listenState.questions.length} stars ได้ ${listenState.correctCount} ดาว จาก ${listenState.questions.length} ข้อ`;
 }
 
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateMathQuestions(mode, count, maxOperand) {
+  const cap = maxOperand || 20;
+  const questions = [];
+  for (let i = 0; i < count; i++) {
+    let a, b, op;
+    if (mode === "addition") {
+      a = randInt(1, Math.min(10, cap));
+      b = randInt(1, Math.min(10, cap));
+      op = "+";
+    } else if (mode === "subtraction") {
+      a = randInt(1, Math.min(10, cap));
+      b = randInt(0, a);
+      op = "-";
+    } else {
+      op = Math.random() < 0.5 ? "+" : "-";
+      if (op === "+") {
+        a = randInt(1, cap);
+        b = randInt(1, Math.max(cap - a, 0) || 1);
+      } else {
+        a = randInt(1, cap);
+        b = randInt(0, a);
+      }
+    }
+    const answer = op === "+" ? a + b : a - b;
+    questions.push({ a, b, op, answer });
+  }
+  return questions;
+}
+
+function buildMathOptions(correctAnswer) {
+  const options = new Set([correctAnswer]);
+  while (options.size < OPTIONS_COUNT) {
+    const offset = randInt(1, 5) * (Math.random() < 0.5 ? -1 : 1);
+    const candidate = correctAnswer + offset;
+    if (candidate >= 0) options.add(candidate);
+  }
+  return shuffle([...options]);
+}
+
+function startMathGame(mode) {
+  const displayStyle = mathState.displayStyle;
+  const maxOperand = displayStyle === "emoji" ? 10 : 20;
+  mathState = {
+    mode,
+    displayStyle,
+    emoji: MATH_EMOJI_POOL[randInt(0, MATH_EMOJI_POOL.length - 1)],
+    questions: generateMathQuestions(mode, QUESTIONS_PER_ROUND, maxOperand),
+    currentIndex: 0,
+    correctCount: 0,
+    locked: false,
+  };
+  showScreen(el.screenMathGame);
+  renderMathQuestion();
+}
+
+function renderMathEmojiGroup(count) {
+  const group = document.createElement("div");
+  group.className = "math-emoji-group";
+  for (let i = 0; i < count; i++) {
+    const item = document.createElement("span");
+    item.className = "math-emoji-item";
+    item.textContent = mathState.emoji;
+    group.appendChild(item);
+  }
+  return group;
+}
+
+function renderMathEmojiOperand(count) {
+  const operand = document.createElement("div");
+  operand.className = "math-emoji-operand";
+  operand.appendChild(renderMathEmojiGroup(count));
+  const countLabel = document.createElement("span");
+  countLabel.className = "math-emoji-count";
+  countLabel.textContent = count;
+  operand.appendChild(countLabel);
+  return operand;
+}
+
+function renderMathQuestion() {
+  mathState.locked = false;
+  el.mathFeedback.textContent = "";
+  el.mathFeedback.className = "feedback";
+
+  const q = mathState.questions[mathState.currentIndex];
+  el.mathProgressDisplay.textContent = `${mathState.currentIndex + 1} / ${mathState.questions.length}`;
+
+  el.mathQuestionDisplay.innerHTML = "";
+  if (mathState.displayStyle === "emoji") {
+    el.mathQuestionDisplay.classList.add("math-question-emoji");
+    el.mathQuestionDisplay.appendChild(renderMathEmojiOperand(q.a));
+    const opSpan = document.createElement("span");
+    opSpan.className = "math-emoji-op";
+    opSpan.textContent = q.op;
+    el.mathQuestionDisplay.appendChild(opSpan);
+    el.mathQuestionDisplay.appendChild(renderMathEmojiOperand(q.b));
+    const eqSpan = document.createElement("span");
+    eqSpan.className = "math-emoji-op";
+    eqSpan.textContent = "= ❓";
+    el.mathQuestionDisplay.appendChild(eqSpan);
+  } else {
+    el.mathQuestionDisplay.classList.remove("math-question-emoji");
+    el.mathQuestionDisplay.textContent = `${q.a} ${q.op} ${q.b} = ?`;
+  }
+
+  const options = buildMathOptions(q.answer);
+  el.mathOptionsGrid.innerHTML = "";
+  options.forEach((opt) => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    if (mathState.displayStyle === "emoji") {
+      btn.classList.add("option-btn-emoji");
+      btn.appendChild(renderMathEmojiGroup(opt));
+      const countLabel = document.createElement("span");
+      countLabel.className = "math-emoji-count";
+      countLabel.textContent = opt;
+      btn.appendChild(countLabel);
+    } else {
+      btn.innerHTML = `<span class="opt-en">${opt}</span>`;
+    }
+    btn._value = opt;
+    btn.addEventListener("click", () => handleMathAnswer(btn, opt, q.answer));
+    el.mathOptionsGrid.appendChild(btn);
+  });
+}
+
+function handleMathAnswer(btn, chosen, correctAnswer) {
+  if (mathState.locked) return;
+  mathState.locked = true;
+
+  const isCorrect = chosen === correctAnswer;
+  const allBtns = el.mathOptionsGrid.querySelectorAll(".option-btn");
+  allBtns.forEach((b) => (b.disabled = true));
+
+  if (isCorrect) {
+    btn.classList.add("correct");
+    el.mathFeedback.textContent = "Correct! เก่งมาก! ถูกต้อง 🎉";
+    el.mathFeedback.className = "feedback correct";
+    mathState.correctCount++;
+    addStars(1);
+    speak("เก่งมาก", "th-TH");
+  } else {
+    btn.classList.add("wrong");
+    btn.classList.add("shake");
+    el.mathFeedback.textContent = `Not quite, the answer is ${correctAnswer} ไม่ใช่นะ คำตอบคือ ${correctAnswer}`;
+    el.mathFeedback.className = "feedback wrong";
+    allBtns.forEach((b) => {
+      if (b._value === correctAnswer) b.classList.add("correct");
+    });
+    speak(`The answer is ${correctAnswer}`, "en-US");
+  }
+
+  setTimeout(() => {
+    mathState.currentIndex++;
+    if (mathState.currentIndex < mathState.questions.length) {
+      renderMathQuestion();
+    } else {
+      showMathResult();
+    }
+  }, 1600);
+}
+
+function showMathResult() {
+  window.speechSynthesis.cancel();
+  playAgainHandler = () => startMathGame(mathState.mode);
+  showScreen(el.screenResult);
+  el.resultScore.textContent = `${mathState.correctCount} / ${mathState.questions.length} stars ได้ ${mathState.correctCount} ดาว จาก ${mathState.questions.length} ข้อ`;
+}
+
 el.btnBack.addEventListener("click", () => {
   window.speechSynthesis.cancel();
   showScreen(el.screenMenu);
@@ -514,6 +738,13 @@ el.btnListenBack.addEventListener("click", () => {
   showScreen(el.screenListenMenu);
 });
 el.btnListenReplay.addEventListener("click", () => speakListenWord());
+
+el.btnMathMode.addEventListener("click", () => showScreen(el.screenMathMenu));
+el.btnMathMenuBack.addEventListener("click", () => showScreen(el.screenMenu));
+el.btnMathBack.addEventListener("click", () => {
+  window.speechSynthesis.cancel();
+  showScreen(el.screenMathMenu);
+});
 
 el.btnReview.addEventListener("click", () => {
   renderReviewScreen();

@@ -29,6 +29,7 @@
       <div class="menu-toolbar">
         <button class="btn-secondary" id="btnReview">🖼️ ดูคำศัพท์ทั้งหมด (เช็ครูป/emoji)</button>
         <button class="btn-secondary" id="btnListenMode">🎧 เกมฟังเสียงทายภาพ</button>
+        <button class="btn-secondary" id="btnMathMode">🔢 เกมคณิตศาสตร์</button>
       </div>
       <div class="category-grid" id="categoryGridReal"></div>
       <hr style="margin: 30px 0;"/>
@@ -72,6 +73,35 @@
       <div class="image-options-grid" id="listenOptionsGrid"></div>
 
       <div class="feedback" id="listenFeedback"></div>
+    </section>
+
+    <!-- หน้าจอเลือกโหมดเกมคณิตศาสตร์ (รวมนับรูปภาพ+ตัวเลขไว้หน้าเดียว) -->
+    <section id="screen-math-menu" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btnMathMenuBack">← Back กลับ</button>
+        <div class="progress">Math Game เกมคณิตศาสตร์</div>
+      </div>
+      <h2 class="section-title">🍓 นับรูปภาพ</h2>
+      <div class="category-grid" id="mathModeGridEmoji"></div>
+      <hr style="margin: 30px 0;"/>
+      <h2 class="section-title">🔢 ตัวเลข</h2>
+      <div class="category-grid" id="mathModeGridDigits"></div>
+    </section>
+
+    <!-- หน้าจอเล่นเกมคณิตศาสตร์ -->
+    <section id="screen-math-game" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btnMathBack">← Back กลับ</button>
+        <div class="progress" id="mathProgressDisplay">1 / 10</div>
+      </div>
+
+      <div class="question-card">
+        <div class="math-question" id="mathQuestionDisplay">1 + 1 = ?</div>
+      </div>
+
+      <div class="options-grid" id="mathOptionsGrid"></div>
+
+      <div class="feedback" id="mathFeedback"></div>
     </section>
 
     <!-- หน้าจอเล่นเกม -->
